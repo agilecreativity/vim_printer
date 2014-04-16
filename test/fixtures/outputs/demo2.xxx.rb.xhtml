@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>~/Dropbox/spikes/vim_printer/test/fixtures/demo2.xxx.rb.xhtml</title>
+<meta name="Generator" content="Vim/7.4" />
+<meta name="plugin-version" content="vim7.4_v1" />
+<meta name="syntax" content="ruby" />
+<meta name="settings" content="no_progress,number_lines,dynamic_folds,no_pre,use_xhtml,use_css,expand_tabs,line_ids,prevent_copy=" />
+<meta name="colorscheme" content="Tomorrow-Night" />
+<style type="text/css">
+
+body { color: #bcbcbc; background-color: #262626; font-family: monospace; }
+* { font-size: 1em; }
+.LineNr { color: #4e4e4e; }
+.Comment { color: #8a8a8a; }
+.FoldColumn { color: #00ffff; background-color: #262626; padding-bottom: 1px; }
+.FoldColumn { text-decoration: none; white-space: pre; }
+.open-fold   .Folded      { display: none; }
+.open-fold   .fulltext      { display: inline; }
+.open-fold   .toggle-open   { display: none; }
+.closed-fold .toggle-closed { display: inline; }
+
+.closed-fold .fulltext      { display: none; }
+.closed-fold .Folded      { display: inline; }
+.closed-fold .toggle-open   { display: inline; }
+.closed-fold .toggle-closed { display: none; }
+
+</style>
+
+<script type='text/javascript'>
+//<![CDATA[
+
+function toggleFold(objID)
+{
+  var fold;
+  fold = document.getElementById(objID);
+  if(fold.className == 'closed-fold')
+  {
+    fold.className = 'open-fold';
+  }
+  else if (fold.className == 'open-fold')
+  {
+    fold.className = 'closed-fold';
+  }
+}
+
+/* function to open any folds containing a jumped-to line before jumping to it */
+function JumpToLine()
+{
+  var lineNum;
+  lineNum = window.location.hash;
+  lineNum = lineNum.substr(1); /* strip off '#' */
+
+  if (lineNum.indexOf('L') == -1) {
+    lineNum = 'L'+lineNum;
+  }
+  lineElem = document.getElementById(lineNum);
+
+  /* navigate upwards in the DOM tree to open all folds containing the line */
+  var node = lineElem;
+  while (node && node.id != 'vimCodeElement')
+  {
+    if (node.className == 'closed-fold')
+    {
+      node.className = 'open-fold';
+    }
+    node = node.parentNode;
+  }
+  /* Always jump to new location even if the line was hidden inside a fold, or
+   * we corrected the raw number to a line ID.
+   */
+  if (lineElem) {
+    lineElem.scrollIntoView(true);
+  }
+  return true;
+}
+if ('onhashchange' in window) {
+  window.onhashchange = JumpToLine;
+}
+
+//]]>
+</script>
+</head>
+<body onload='JumpToLine();'>
+<div id='vimCodeElement'>
+<span id="L1" class="LineNr">1&#160;</span><span class="Comment"># file: spec/fixtures/demo2.xxx.rb</span><br />
+</div>
+</body>
+</html>
+<!-- vim: set foldmethod=manual : -->

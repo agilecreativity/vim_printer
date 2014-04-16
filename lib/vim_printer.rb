@@ -1,0 +1,7 @@
+require 'thor'
+require 'code_lister'
+require_relative 'vim_printer/core_ext/hash'
+require_relative 'vim_printer/version'
+require_relative 'vim_printer/logger'
+require_relative 'vim_printer/utility'
+require_relative 'vim_printer/cli'
