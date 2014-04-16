@@ -169,6 +169,12 @@ rake
 
 ### Changelog
 
+#### 0.0.2
+
+- Add the 'index_html' gem to generate the 'index.html' to the output
+
+- Fix the error in documentation (YARD syntax error)
+
 #### 0.0.1
 
 - Initial release

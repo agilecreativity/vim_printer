@@ -17,7 +17,8 @@ module VimPrinter
     class << self
 
       # Find list of files based on certain extension
-      # @param [String] bas_dir the starting directory
+      #
+      # @param [String] base_dir the starting directory
       # @param [String] extension the file extension to search for
       #
       # @return [Array<String>] list of matching files or empty list
@@ -58,7 +59,7 @@ module VimPrinter
 
       # Add suffix to each extensions
       #
-      # @param [Array<String>] extension list of extension
+      # @param [Array<String>] extensions list of extension
       # @param [String] suffix the suffix string
       #
       # @return [Array<String>] new list with the suffix added to each element

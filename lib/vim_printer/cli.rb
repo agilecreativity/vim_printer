@@ -1,4 +1,5 @@
 require 'code_lister'
+require 'index_html'
 require_relative '../vim_printer'
 
 module VimPrinter
@@ -52,7 +53,8 @@ Print the list of files
 
     private
 
-    # @param args [Hash<Symbol, Object>] options argument
+    #
+    # @param [Hash<Symbol, Object>] options the options argument
     def execute(options = {})
 
       input_files = CodeLister.files(options)
@@ -61,16 +63,28 @@ Print the list of files
         puts "No file found for your option: #{options}"
         return
       end
+
       to_htmls(input_files, options)
 
-      # search for files that we created
+      # Search for files that we created
       generated_files = VimPrinter::Utility.find(options[:base_dir])
 
-      # tar.gzip them for user
+      # Generate the 'index.html' file
+      index_file = "#{options[:base_dir]}/index.html"
+      IndexHtml.htmlify generated_files,
+                        base_dir: options[:base_dir],
+                        output: index_file
+
+      # We add the missing index file
+      generated_files << index_file
+
       VimPrinter::Utility.tar_gzip_files(generated_files, 'output.tar.gz')
 
-      # cleanup after ourself
+      # Cleanup after ourself
       VimPrinter::Utility.delete(generated_files)
+
+      # Remove the extra index.html file as well
+      FileUtils.rm_rf(index_file)
 
       # report the result
       puts "Your result should be available at `output.tar.gz`"
