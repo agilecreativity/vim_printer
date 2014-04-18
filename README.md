@@ -169,6 +169,14 @@ rake
 
 ### Changelog
 
+#### 0.0.3
+
+- Use generic functions from [agile_utils][] gem
+
+- Update [index_html][] gem from 0.0.5 to 0.0.7
+
+- Fix the bug in generated 'index.html' due to bug from index_html gem
+
 #### 0.0.2
 
 - Add the 'index_html' gem to generate the 'index.html' to the output
@@ -196,3 +204,5 @@ rake
 [vim colorschemes]: https://github.com/flazz/vim-colorschemes/tree/master/colors
 [seoul256.vim]: https://github.com/junegunn/seoul256.vim
 [Tomorrow-theme]: https://github.com/ChrisKempson/Tomorrow-Theme
+[agile_utils]: https://rubygems.org/gems/agile_utils
+[index_html]: https://rubygems.org/gems/index_html

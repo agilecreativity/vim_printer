@@ -1,8 +1,10 @@
+require 'agile_utils'
 require 'code_lister'
 require 'index_html'
 require_relative '../vim_printer'
 
 module VimPrinter
+  include AgileUtils
 
   class CLI < CodeLister::BaseCLI
 
@@ -67,7 +69,7 @@ Print the list of files
       to_htmls(input_files, options)
 
       # Search for files that we created
-      generated_files = VimPrinter::Utility.find(options[:base_dir])
+      generated_files = AgileUtils::FileUtil.find(options[:base_dir])
 
       # Generate the 'index.html' file
       index_file = "#{options[:base_dir]}/index.html"
@@ -75,19 +77,16 @@ Print the list of files
                         base_dir: options[:base_dir],
                         output: index_file
 
-      # We add the missing index file
+      # Add the missing index file
       generated_files << index_file
+      AgileUtils::FileUtil.tar_gzip_files(generated_files, 'output.tar.gz')
+      AgileUtils::FileUtil.delete(generated_files)
 
-      VimPrinter::Utility.tar_gzip_files(generated_files, 'output.tar.gz')
-
-      # Cleanup after ourself
-      VimPrinter::Utility.delete(generated_files)
-
-      # Remove the extra index.html file as well
+      # Remove the extra index.html file
       FileUtils.rm_rf(index_file)
 
       # report the result
-      puts "Your result should be available at `output.tar.gz`"
+      puts "Your result should be available at #{File.absolute_path('output.tar.gz')}"
     end
 
     # convert multiple files to 'html'
