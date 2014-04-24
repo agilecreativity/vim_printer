@@ -1,4 +1,5 @@
 require 'thor'
+require 'agile_utils'
 require 'code_lister'
 require_relative 'vim_printer/core_ext/hash'
 require_relative 'vim_printer/version'

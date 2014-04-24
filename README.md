@@ -169,11 +169,19 @@ rake
 
 ### Changelog
 
+#### 0.0.4
+
+- Fix the output path of 'index.html' to root directory to make links valid.
+
+- Update [agile_utils][] to '0.0.4'
+
+- Code cleanup using rubocop
+
 #### 0.0.3
 
 - Use generic functions from [agile_utils][] gem
 
-- Update [index_html][] gem from 0.0.5 to 0.0.7
+- Update [index_html][] gem to 0.0.7
 
 - Fix the bug in generated 'index.html' due to bug from index_html gem
 
