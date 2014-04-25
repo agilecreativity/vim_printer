@@ -40,7 +40,7 @@ Options:
   -e, [--exts=one two three]               # List of extensions to search for
   -f, [--non-exts=one two three]           # List of extensions to search for
   -n, [--inc-words=one two three]          # List of words to be included in the result
-  -n, [--exc-words=one two three]          # List of words to be included in the result
+  -x, [--exc-words=one two three]          # List of words to be excluded from the result
   -i, [--ignore-case], [--no-ignore-case]  # Match case insensitively
                                            # Default: true
   -r, [--recursive], [--no-recursive]      # Search for files recursively
