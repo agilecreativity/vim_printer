@@ -62,8 +62,6 @@ vim_printer print -b test/fixtures/inputs -e rb java -r
 Will produce the file `output.tar.gz` with the following result on the screen.
 
 ```
-FYI: your options {:base_dir=>"test/fixtures/inputs/", :exts=>["rb", "java"], :non_exts=>[], :inc_words=>[], :exc_words=>[], :ignore_case=>true, :recursive=>true, :version=>false, :theme=>"default"}
-
 FYI: process file 1 of 8 : test/fixtures/inputs/demo1.xxx.rb
 FYI: process file 2 of 8 : test/fixtures/inputs/demo1.yyy.rb
 FYI: process file 3 of 8 : test/fixtures/inputs/demo2.xxx.rb
@@ -72,9 +70,7 @@ FYI: process file 5 of 8 : test/fixtures/inputs/java/demo3.xxx.java
 FYI: process file 6 of 8 : test/fixtures/inputs/java/demo3.yyy.java
 FYI: process file 7 of 8 : test/fixtures/inputs/java/demo4.xxx.java
 FYI: process file 8 of 8 : test/fixtures/inputs/java/demo4.yyy.java
-
-Your result should be available at `output.tar.gz`
-
+Your output file is output.tar.gz
 ```
 
 ### Usage
@@ -168,6 +164,14 @@ rake
 - Pull request is always welcome.
 
 ### Changelog
+
+#### 0.0.6
+
+- Move the theme option to [vim_printer][]
+
+- Use [agile_utils][] versino 0.0.8
+
+- Make location of the 'index.html' to the current run directory
 
 #### 0.0.5
 

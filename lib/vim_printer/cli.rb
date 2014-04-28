@@ -6,7 +6,7 @@ require_relative '../vim_printer'
 module VimPrinter
   include AgileUtils
 
-  class CLI < CodeLister::BaseCLI
+  class CLI < Thor
     desc 'print', 'Print the list of files'
 
     method_option *AgileUtils::Options::BASE_DIR
@@ -16,9 +16,12 @@ module VimPrinter
     method_option *AgileUtils::Options::EXC_WORDS
     method_option *AgileUtils::Options::IGNORE_CASE
     method_option *AgileUtils::Options::RECURSIVE
-    method_option *AgileUtils::Options::THEME
     method_option *AgileUtils::Options::VERSION
 
+    method_option :theme,
+                  aliases: '-t',
+                  desc: 'Vim colorscheme to use',
+                  default: 'default'
     def print
       opts = options.symbolize_keys
       if opts[:version]
@@ -74,8 +77,7 @@ Print the list of files
       # TODO: may be use the CodeLister.files(..) instead?
       generated_files = AgileUtils::FileUtil.find(options[:base_dir])
 
-      # Generate the 'index.html' file
-      index_file = "#{options[:base_dir]}/index.html"
+      index_file = "./index.html"
 
       IndexHtml.htmlify generated_files,
                         base_dir: options[:base_dir],
