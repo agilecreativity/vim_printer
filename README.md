@@ -1,5 +1,9 @@
 ## vim_printer
 
+[![Gem Version](https://badge.fury.io/rb/vim_printer.svg)](http://badge.fury.io/rb/vim_printer)
+[![Dependency Status](https://gemnasium.com/agilecreativity/vim_printer.png)](https://gemnasium.com/agilecreativity/vim_printer)
+[![Code Climate](https://codeclimate.com/github/agilecreativity/vim_printer.png)](https://codeclimate.com/github/agilecreativity/vim_printer)
+
 Print any files to html using the power of Vim. Output will be saved to `output.tar.gz` and ready for
 extract and viewing in your favourite browser.
 
@@ -7,8 +11,6 @@ extract and viewing in your favourite browser.
 - Can print any files in any languages that you can open with Vim.
 - Use the power of [Vim][] to print the code without any other tools.
 - Tested in Linux/OSX and should also works with Windows.
-
-[![Gem Version](https://badge.fury.io/rb/vim_printer.svg)](http://badge.fury.io/rb/vim_printer)
 
 ### Example Outputs:
 
@@ -40,7 +42,7 @@ The html output as renderd in the browser
 
   * If you like you can use [my dotvim][] which is based on the [NeoBundle][].
 
-  * Use any [vim colorschemes][] if not the `default` scheme will be used.
+  * Use any [vim colorschemes][] if not the `default` colorscheme will be used.
 
     My personal favourite are [seoul256.vim][] and [Tomorrow-Theme][]
 
@@ -157,52 +159,6 @@ rake
 
 - Will be listed here if any.
 
-### Disclaimers
-
-- This is still early release of the gem, I may make several changes to the API.
-- If you find any issues please let me know.
-- Pull request is always welcome.
-
-### Changelog
-
-#### 0.0.6
-
-- Move the theme option to [vim_printer][]
-
-- Use [agile_utils][] versino 0.0.8
-
-- Make location of the 'index.html' to the current run directory
-
-#### 0.0.5
-
-- Use [agile_utils][] version 0.0.5 that have the option bug fix
-
-#### 0.0.4
-
-- Fix the output path of 'index.html' to root directory to make links valid.
-
-- Update [agile_utils][] to '0.0.4'
-
-- Code cleanup using rubocop
-
-#### 0.0.3
-
-- Use generic functions from [agile_utils][] gem
-
-- Update [index_html][] gem to 0.0.7
-
-- Fix the bug in generated 'index.html' due to bug from index_html gem
-
-#### 0.0.2
-
-- Add the 'index_html' gem to generate the 'index.html' to the output
-
-- Fix the error in documentation (YARD syntax error)
-
-#### 0.0.1
-
-- Initial release
-
 ### Contributing
 
 1. Fork it
@@ -220,5 +176,3 @@ rake
 [vim colorschemes]: https://github.com/flazz/vim-colorschemes/tree/master/colors
 [seoul256.vim]: https://github.com/junegunn/seoul256.vim
 [Tomorrow-theme]: https://github.com/ChrisKempson/Tomorrow-Theme
-[agile_utils]: https://rubygems.org/gems/agile_utils
-[index_html]: https://rubygems.org/gems/index_html
