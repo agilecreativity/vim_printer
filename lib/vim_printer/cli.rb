@@ -86,14 +86,14 @@ Print the list of files
       # Add the missing index file
       generated_files << index_file
 
-      AgileUtils::FileUtil.tar_gzip_files(generated_files, 'output.tar.gz')
+      AgileUtils::FileUtil.tar_gzip_files(generated_files, 'vim_printer_output.tar.gz')
 
       AgileUtils::FileUtil.delete(generated_files)
 
       # Remove the extra index.html file
       FileUtils.rm_rf(index_file)
 
-      puts "Your output file is #{File.absolute_path('output.tar.gz')}"
+      puts "Your output file is #{File.absolute_path('vim_printer_output.tar.gz')}"
     end
 
     # convert multiple files to 'html'

@@ -8,15 +8,23 @@ Gem::Specification.new do |spec|
   spec.version       = VimPrinter::VERSION
   spec.authors       = ['Burin Choomnuan']
   spec.email         = ['agilecreativity@gmail.com']
-  spec.description   = %q{Print/export files to html using the power of Vim editor}
-  spec.summary       = %q{Print/export files to html using the power of Vim}
+  spec.description   = %q{Batch convert multiple non-binary files to htmls using the power of Vim editor}
+  spec.summary       = %q{Batch convert multiple non-binary files to htmls using the power of Vim}
   spec.homepage      = 'https://github.com/agilecreativity/vim_printer'
   spec.license       = 'MIT'
-  spec.files         = `git ls-files`.split($/)
+  spec.files         = Dir.glob('{bin,lib}/**/*') + %w(Gemfile
+                                                       Rakefile
+                                                       vim_printer.gemspec
+                                                       README.md
+                                                       CHANGELOGS.md
+                                                       LICENSE
+                                                       .rubocop.yml
+                                                       .gitignore
+                                                       rubocop-todo.yml)
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
-  spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
+  spec.test_files    = Dir.glob('{test}/**/*')
   spec.require_paths = ['lib']
-  spec.add_runtime_dependency 'thor', '~> 0.18'
+  spec.add_runtime_dependency 'thor', '~> 0.19'
   spec.add_runtime_dependency 'code_lister', '~> 0.0.8'
   spec.add_runtime_dependency 'index_html', '~> 0.1.0'
   spec.add_runtime_dependency 'agile_utils', '~> 0.0.9'
@@ -28,6 +36,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'minitest', '~> 5.3'
   spec.add_development_dependency 'guard', '~> 2.6'
   spec.add_development_dependency 'pry', '~> 0.9'
+  spec.add_development_dependency 'rubocop', '~> 0.21'
   spec.add_development_dependency 'gem-ctags', '~> 1.0'
   spec.add_development_dependency 'yard', '~> 0.8'
 end

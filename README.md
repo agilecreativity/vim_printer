@@ -3,8 +3,9 @@
 [![Gem Version](https://badge.fury.io/rb/vim_printer.svg)](http://badge.fury.io/rb/vim_printer)
 [![Dependency Status](https://gemnasium.com/agilecreativity/vim_printer.png)](https://gemnasium.com/agilecreativity/vim_printer)
 [![Code Climate](https://codeclimate.com/github/agilecreativity/vim_printer.png)](https://codeclimate.com/github/agilecreativity/vim_printer)
+[![Endorse](https://api.coderwall.com/agilecreativity/endorsecount.png)](https://coderwall.com/agilecreativity)
 
-Print any files to html using the power of Vim. Output will be saved to `output.tar.gz` and ready for
+Print any files to html using the power of Vim. Output will be saved to `vim_printer_output.tar.gz` and ready for
 extract and viewing in your favourite browser.
 
 - Unlimited support for [vim colorschemes][] if enabled, or `default` colorscheme that comes with Vim.

@@ -1,5 +1,12 @@
 ### Changelog
 
+#### 0.0.8 (planned)
+
+- Update gemspec
+- Update dependency to the latest version
+- Make the `--base-dir .` the default behavior (make output better)
+- Add rubocop gem
+
 #### 0.0.7
 
 - Update dependency gems to the latest version
