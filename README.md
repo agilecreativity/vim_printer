@@ -156,9 +156,6 @@ bundle
 # run default test
 rake
 ```
-### Known Issues
-
-- Will be listed here if any.
 
 ### Contributing
 

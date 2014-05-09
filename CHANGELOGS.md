@@ -1,5 +1,8 @@
 ### Changelog
 
+#### 0.0.9
+- Update to latest gems
+
 #### 0.0.8 (planned)
 
 - Update gemspec
