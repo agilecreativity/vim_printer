@@ -8,8 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = VimPrinter::VERSION
   spec.authors       = ['Burin Choomnuan']
   spec.email         = ['agilecreativity@gmail.com']
-  spec.description   = %q{Batch convert multiple non-binary files to htmls using the power of Vim editor}
-  spec.summary       = %q{Batch convert multiple non-binary files to htmls using the power of Vim}
+  spec.description   = %q(Batch convert multiple files to htmls using the power of Vim editor)
+  spec.summary       = %q(Batch convert multiple files to htmls using the power of Vim.
+                          Work will any languages that can be open with Vim e.g. any non-binary files.)
   spec.homepage      = 'https://github.com/agilecreativity/vim_printer'
   spec.license       = 'MIT'
   spec.files         = Dir.glob('{bin,lib}/**/*') + %w(Gemfile
@@ -19,8 +20,7 @@ Gem::Specification.new do |spec|
                                                        CHANGELOGS.md
                                                        LICENSE
                                                        .rubocop.yml
-                                                       .gitignore
-                                                       rubocop-todo.yml)
+                                                       .gitignore)
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.test_files    = Dir.glob('{test}/**/*')
   spec.require_paths = ['lib']

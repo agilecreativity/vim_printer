@@ -1,5 +1,10 @@
 ### Changelog
 
+#### 0.1.0
+
+- Make the output work properly when `--base-dir` options is relative path
+- Update code cleanup
+
 #### 0.0.9
 - Update to latest gems
 

@@ -1,6 +1,7 @@
 require 'agile_utils'
 require 'code_lister'
 require 'index_html'
+require 'fileutils'
 require_relative '../vim_printer'
 
 module VimPrinter
@@ -73,11 +74,12 @@ Print the list of files
 
       to_htmls(input_files, options)
 
-      # Search for files that we created
-      # TODO: may be use the CodeLister.files(..) instead?
-      generated_files = AgileUtils::FileUtil.find(options[:base_dir])
+      # The generated files is the same as input file but with '.xhtml' appended
+      generated_files = input_files.map do |f|
+        "#{f}.xhtml"
+      end
 
-      index_file = "./index.html"
+      index_file = './index.html'
 
       IndexHtml.htmlify generated_files,
                         base_dir: options[:base_dir],
@@ -98,6 +100,7 @@ Print the list of files
 
     # convert multiple files to 'html'
     def to_htmls(files, options = {})
+      FileUtils.chdir(File.expand_path(options[:base_dir]))
       files.each_with_index do |file, index|
         puts "FYI: process file #{index + 1} of #{files.size} : #{file}"
         to_html(file, options)
@@ -132,7 +135,6 @@ Print the list of files
         '> /dev/null'
       ]
 
-      # Note: have to run as system only
       system(command.concat(args).join(' '))
     end
   end

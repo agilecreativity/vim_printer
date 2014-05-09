@@ -3,7 +3,6 @@
 [![Gem Version](https://badge.fury.io/rb/vim_printer.svg)](http://badge.fury.io/rb/vim_printer)
 [![Dependency Status](https://gemnasium.com/agilecreativity/vim_printer.png)](https://gemnasium.com/agilecreativity/vim_printer)
 [![Code Climate](https://codeclimate.com/github/agilecreativity/vim_printer.png)](https://codeclimate.com/github/agilecreativity/vim_printer)
-[![Endorse](https://api.coderwall.com/agilecreativity/endorsecount.png)](https://coderwall.com/agilecreativity)
 
 Print any files to html using the power of Vim. Output will be saved to `vim_printer_output.tar.gz` and ready for
 extract and viewing in your favourite browser.
@@ -65,15 +64,15 @@ vim_printer print -b test/fixtures/inputs -e rb java -r
 Will produce the file `output.tar.gz` with the following result on the screen.
 
 ```
-FYI: process file 1 of 8 : test/fixtures/inputs/demo1.xxx.rb
-FYI: process file 2 of 8 : test/fixtures/inputs/demo1.yyy.rb
-FYI: process file 3 of 8 : test/fixtures/inputs/demo2.xxx.rb
-FYI: process file 4 of 8 : test/fixtures/inputs/demo2.yyy.rb
-FYI: process file 5 of 8 : test/fixtures/inputs/java/demo3.xxx.java
-FYI: process file 6 of 8 : test/fixtures/inputs/java/demo3.yyy.java
-FYI: process file 7 of 8 : test/fixtures/inputs/java/demo4.xxx.java
-FYI: process file 8 of 8 : test/fixtures/inputs/java/demo4.yyy.java
-Your output file is output.tar.gz
+FYI: process file 1 of 8 : ./demo1.xxx.rb
+FYI: process file 2 of 8 : ./demo1.yyy.rb
+FYI: process file 3 of 8 : ./demo2.xxx.rb
+FYI: process file 4 of 8 : ./demo2.yyy.rb
+FYI: process file 5 of 8 : ./java/demo3.xxx.java
+FYI: process file 6 of 8 : ./java/demo3.yyy.java
+FYI: process file 7 of 8 : ./java/demo4.xxx.java
+FYI: process file 8 of 8 : ./java/demo4.yyy.java
+Your output file is ./test/fixtures/inputs/vim_printer_output.tar.gz
 ```
 
 ### Usage
