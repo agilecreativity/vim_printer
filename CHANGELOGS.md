@@ -1,8 +1,12 @@
 ### Changelog
 
+#### 0.1.2
+
+- Minor code cleanup
+
 #### 0.1.1
 
-- First [Semantic Versioning] release
+- First [Semantic Versioning][] release
 
 #### 0.1.0
 
@@ -10,9 +14,10 @@
 - Update code cleanup
 
 #### 0.0.9
+
 - Update to latest gems
 
-#### 0.0.8 (planned)
+#### 0.0.8
 
 - Update gemspec
 - Update dependency to the latest version
@@ -59,3 +64,4 @@
 [agile_utils]: https://rubygems.org/gems/agile_utils
 [index_html]: https://rubygems.org/gems/index_html
 [vim_printer]: https://rubygems.org/gems/vim_printer
+[Semantic Versioning]: http://semver.org

@@ -17,4 +17,3 @@ test/version_tmp
 tmp
 # Custom ignore files
 vim_printer_output.tar.gz
-rubocop-todo.yml

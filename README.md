@@ -1,16 +1,19 @@
 ## vim_printer
 
-[![Gem Version](https://badge.fury.io/rb/vim_printer.svg)](http://badge.fury.io/rb/vim_printer)
-[![Dependency Status](https://gemnasium.com/agilecreativity/vim_printer.png)](https://gemnasium.com/agilecreativity/vim_printer)
-[![Code Climate](https://codeclimate.com/github/agilecreativity/vim_printer.png)](https://codeclimate.com/github/agilecreativity/vim_printer)
+[![Gem Version](https://badge.fury.io/rb/vim_printer.svg)][gem]
+[![Dependency Status](https://gemnasium.com/agilecreativity/vim_printer.png)][gemnasium]
+[![Code Climate](https://codeclimate.com/github/agilecreativity/vim_printer.png)][codeclimate]
 
-Print any files to html using the power of Vim. Output will be saved to `vim_printer_output.tar.gz` and ready for
+[gem]: http://badge.fury.io/rb/vim_printer
+[gemnasium]: https://gemnasium.com/agilecreativity/vim_printer
+[codeclimate]: https://codeclimate.com/github/agilecreativity/vim_printer
+
+Batch print/export files to htmls using the power of Vim. Output will be saved to `vim_printer_output.tar.gz` and ready for
 extract and viewing in your favourite browser.
 
 - Unlimited support for [vim colorschemes][] if enabled, or `default` colorscheme that comes with Vim.
 - Can print any files in any languages that you can open with Vim.
 - Use the power of [Vim][] to print the code without any other tools.
-- Tested in Linux/OSX and should also works with Windows.
 
 ### Example Outputs:
 
@@ -109,7 +112,7 @@ To see the output in your browser just type:
 mkdir -p ~/Desktop/vim_printer
 mv output.tar.gz ~/Desktop/vim_printer
 cd ~/Desktop/vim_printer
-tar zxvf output.tar.gz
+tar zxvf vim_printer_output.tar.gz
 ```
 
 - Print only files that contain the word `xxx` in the title
