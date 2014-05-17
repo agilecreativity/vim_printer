@@ -1,15 +1,13 @@
-require 'agile_utils'
-require 'code_lister'
-require 'index_html'
-require 'fileutils'
-require_relative '../vim_printer'
-
+require "agile_utils"
+require "code_lister"
+require "index_html"
+require "fileutils"
+require_relative "../vim_printer"
 module VimPrinter
   include AgileUtils
 
   class CLI < Thor
-    desc 'print', 'Print the list of files'
-
+    desc "print", "Print the list of files"
     method_option *AgileUtils::Options::BASE_DIR
     method_option *AgileUtils::Options::EXTS
     method_option *AgileUtils::Options::NON_EXTS
@@ -18,11 +16,10 @@ module VimPrinter
     method_option *AgileUtils::Options::IGNORE_CASE
     method_option *AgileUtils::Options::RECURSIVE
     method_option *AgileUtils::Options::VERSION
-
     method_option :theme,
-                  aliases: '-t',
-                  desc: 'Vim colorscheme to use',
-                  default: 'default'
+                  aliases: "-t",
+                  desc: "Vim colorscheme to use",
+                  default: "default"
     def print
       opts = options.symbolize_keys
       if opts[:version]
@@ -32,11 +29,11 @@ module VimPrinter
       execute(opts)
     end
 
-    desc 'usage', 'Display help screen'
+    desc "usage", "Display help screen"
     def usage
       puts <<-EOS
 Usage:
-  vim_printer print [OPTIONS]
+  vim_printer
 
 Options:
   -b, [--base-dir=BASE_DIR]                # Base directory
@@ -59,7 +56,7 @@ Print the list of files
 
     default_task :usage
 
-    private
+  private
 
     # Main entry point to export the code
     #
@@ -79,7 +76,7 @@ Print the list of files
         "#{f}.xhtml"
       end
 
-      index_file = './index.html'
+      index_file = "./index.html"
 
       IndexHtml.htmlify generated_files,
                         base_dir: options[:base_dir],
@@ -88,14 +85,14 @@ Print the list of files
       # Add the missing index file
       generated_files << index_file
 
-      AgileUtils::FileUtil.tar_gzip_files(generated_files, 'vim_printer_output.tar.gz')
+      AgileUtils::FileUtil.tar_gzip_files(generated_files, "vim_printer_output.tar.gz")
 
       AgileUtils::FileUtil.delete(generated_files)
 
       # Remove the extra index.html file
       FileUtils.rm_rf(index_file)
 
-      puts "Your output file is #{File.absolute_path('vim_printer_output.tar.gz')}"
+      puts "Your output file is #{File.absolute_path("vim_printer_output.tar.gz")}"
     end
 
     # convert multiple files to 'html'
@@ -109,15 +106,15 @@ Print the list of files
 
     def to_html(filename, options = {})
       opts = {
-        theme: 'seoul256-light'
+        theme: "seoul256-light"
       }.merge(options)
 
       fail "Invalid input file #{filename}" unless File.exist?(filename)
 
       # sensible argument, see :help :TOhtml (from Vim)
       command = [
-        'vim',
-        '-E',
+        "vim",
+        "-E",
         "-c 'let g:html_expand_tabs = 1'",
         "-c 'let g:html_use_css = 1'",
         "-c 'let g:html_no_progress = 1'"
@@ -132,10 +129,9 @@ Print the list of files
         "-c 'w'",
         "-c 'qa!'",
         "#{filename}",
-        '> /dev/null'
+        "> /dev/null"
       ]
-
-      system(command.concat(args).join(' '))
+      system(command.concat(args).join(" "))
     end
   end
 end

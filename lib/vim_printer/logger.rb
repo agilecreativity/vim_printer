@@ -1,4 +1,4 @@
-require 'logger'
+require "logger"
 module VimPrinter
   class << self
     attr_writer :logger

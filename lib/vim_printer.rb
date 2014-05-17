@@ -1,6 +1,6 @@
-require 'thor'
-require 'agile_utils'
-require 'code_lister'
-require_relative 'vim_printer/version'
-require_relative 'vim_printer/logger'
-require_relative 'vim_printer/cli'
+require "thor"
+require "agile_utils"
+require "code_lister"
+require_relative "vim_printer/version"
+require_relative "vim_printer/logger"
+require_relative "vim_printer/cli"

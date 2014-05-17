@@ -1,4 +1,8 @@
 #!/usr/bin/env ruby
-require_relative '../lib/vim_printer'
+require_relative "../lib/vim_printer"
 include VimPrinter
-VimPrinter::CLI.start(ARGV)
+if ARGV.empty?
+  VimPrinter::CLI.start(%w[usage])
+else
+  VimPrinter::CLI.start(%w[print].concat(ARGV))
+end

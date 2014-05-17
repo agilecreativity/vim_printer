@@ -1,5 +1,10 @@
 ### Changelog
 
+#### 0.1.3
+
+- Simplify the CLI interface
+- Cleanup style with rubocop
+
 #### 0.1.2
 
 - Minor code cleanup

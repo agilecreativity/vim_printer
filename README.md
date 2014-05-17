@@ -40,19 +40,13 @@ The html output as renderd in the browser
 - Any decent `~/.vimrc` should do
 
   * There are so many great vim dotfiles in github repos.
-
   * [NeoBundle][] is a very good start if you are new to Vim.
-
   * If you like you can use [my dotvim][] which is based on the [NeoBundle][].
-
   * Use any [vim colorschemes][] if not the `default` colorscheme will be used.
-
     My personal favourite are [seoul256.vim][] and [Tomorrow-Theme][]
 
 - Any valid file types that are supported by Vim will be shown proper color in the output.
-
   * By default Vim comes with supported for major languages so you should see the proper syntax with color in the output.
-
   * On newer language like [Elixir][], you may have to first install [vim-elixir][] to see the proper syntax in the output.
     If this is not installed then you will get the output but will not have the beautiful color syntax.
 
@@ -61,7 +55,7 @@ The html output as renderd in the browser
 - Run with the sample fixture files
 
 ```sh
-vim_printer print -b test/fixtures/inputs -e rb java -r
+vim_printer -b test/fixtures/inputs -e rb java -r
 ```
 
 Will produce the file `output.tar.gz` with the following result on the screen.
@@ -100,9 +94,9 @@ The following command will print out all java, and ruby files recursively
 using the `solarized` colorscheme.
 
 ```sh
-vim_printer print --base-dir ./test/fixtures \
-                  --exts rb \
-                  --theme solarized
+vim_printer --base-dir ./test/fixtures \
+            --exts rb \
+            --theme solarized
 ```
 
 Your output will be saved to the default `output.tar.gz` in the directory where you run this command.
@@ -118,10 +112,10 @@ tar zxvf vim_printer_output.tar.gz
 - Print only files that contain the word `xxx` in the title
 
 ```sh
-vim_printer print --base-dir ./test/fixtures \
-                  --exts java \
-                  --theme solarized \
-                  --n xxx
+vim_printer --base-dir ./test/fixtures \
+            --exts java \
+            --theme solarized \
+            --n xxx
 ```
 
 - For help in using the gem just type `vim_printer` without any parameter
@@ -129,7 +123,7 @@ You should see something like the following:
 
 ```
 Usage:
-  vim_printer print [OPTIONS]
+  vim_printer
 
 Options:
   -b, [--base-dir=BASE_DIR]                # Base directory
