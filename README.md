@@ -39,14 +39,14 @@ The html output as renderd in the browser
 
 - Any decent `~/.vimrc` should do
 
-  * There are so many great vim dotfiles in github repos.
+  * There are so many great vim dotfiles in github repos, just search for `dotfiles` keyword:w
   * [NeoBundle][] is a very good start if you are new to Vim.
   * If you like you can use [my dotvim][] which is based on the [NeoBundle][].
   * Use any [vim colorschemes][] if not the `default` colorscheme will be used.
     My personal favourite are [seoul256.vim][] and [Tomorrow-Theme][]
 
-- Any valid file types that are supported by Vim will be shown proper color in the output.
-  * By default Vim comes with supported for major languages so you should see the proper syntax with color in the output.
+- Any valid file types that are supported by Vim will produce proper color syntax in the output.
+  * By default Vim supports most of major languages so you should see the proper syntax with color in the output.
   * On newer language like [Elixir][], you may have to first install [vim-elixir][] to see the proper syntax in the output.
     If this is not installed then you will get the output but will not have the beautiful color syntax.
 
@@ -79,16 +79,18 @@ Your output file is ./test/fixtures/inputs/vim_printer_output.tar.gz
 e.g. for rbenv your session will be something like
 
 ```sh
-rbenv local 2.1.1 # or whatever the version of you ruby
+rbenv local 2.1.2
 rbenv rehash
 gem install vim_printer
 ```
+
 - Print any files using the gem
 
 ```sh
 vim_printer
 ```
-- Print any files that you like using the simple command
+
+- Print any files that you like using the simplest command
 
 The following command will print out all java, and ruby files recursively
 using the `solarized` colorscheme.
@@ -104,7 +106,7 @@ To see the output in your browser just type:
 
 ```sh
 mkdir -p ~/Desktop/vim_printer
-mv output.tar.gz ~/Desktop/vim_printer
+mv vim_printer_output.tar.gz ~/Desktop/vim_printer
 cd ~/Desktop/vim_printer
 tar zxvf vim_printer_output.tar.gz
 ```
@@ -118,8 +120,14 @@ vim_printer --base-dir ./test/fixtures \
             --n xxx
 ```
 
+- To include files that do not have any extension you can use `--non-exts`
+
+```shell
+# To print all ruby files as well as 'Gemfile' or 'Rakefile'
+vim_printer -e ruby -f Gemfile Rakefile -r
+```
+
 - For help in using the gem just type `vim_printer` without any parameter
-You should see something like the following:
 
 ```
 Usage:

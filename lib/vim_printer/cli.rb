@@ -5,7 +5,6 @@ require "fileutils"
 require_relative "../vim_printer"
 module VimPrinter
   include AgileUtils
-
   class CLI < Thor
     desc "print", "Print the list of files"
     method_option *AgileUtils::Options::BASE_DIR
@@ -77,21 +76,14 @@ Print the list of files
       end
 
       index_file = "./index.html"
-
       IndexHtml.htmlify generated_files,
                         base_dir: options[:base_dir],
                         output: index_file
 
-      # Add the missing index file
       generated_files << index_file
-
       AgileUtils::FileUtil.tar_gzip_files(generated_files, "vim_printer_output.tar.gz")
-
       AgileUtils::FileUtil.delete(generated_files)
-
-      # Remove the extra index.html file
       FileUtils.rm_rf(index_file)
-
       puts "Your output file is #{File.absolute_path("vim_printer_output.tar.gz")}"
     end
 
