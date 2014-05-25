@@ -1,5 +1,9 @@
 ### Changelog
 
+#### 0.1.4
+
+- Skip binary input files when applicable
+
 #### 0.1.3
 
 - Simplify the CLI interface

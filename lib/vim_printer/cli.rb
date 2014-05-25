@@ -62,7 +62,7 @@ Print the list of files
     # @param [Hash<Symbol, Object>] options the options argument
     def execute(options = {})
       input_files = CodeLister.files(options)
-
+      input_files.delete_if { |file| File.binary?(file.gsub(/^\./,options[:base_dir])) }
       if input_files.empty?
         puts "No file found for your option: #{options}"
         return
