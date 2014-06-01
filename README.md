@@ -55,10 +55,10 @@ The html output as renderd in the browser
 - Run with the sample fixture files
 
 ```sh
-vim_printer -b test/fixtures/inputs -e rb java -r
+vim_printer -b test/fixtures -e rb java -r
 ```
 
-Will produce the file `output.tar.gz` with the following result on the screen.
+Will produce the file `vim_printer_fixtures.tar.gz` with the following result on the screen.
 
 ```
 FYI: process file 1 of 8 : ./demo1.xxx.rb
@@ -69,7 +69,7 @@ FYI: process file 5 of 8 : ./java/demo3.xxx.java
 FYI: process file 6 of 8 : ./java/demo3.yyy.java
 FYI: process file 7 of 8 : ./java/demo4.xxx.java
 FYI: process file 8 of 8 : ./java/demo4.yyy.java
-Your output file is ./test/fixtures/inputs/vim_printer_output.tar.gz
+Your output file is ./test/fixtures/vim_printer_fixtures.tar.gz
 ```
 
 ### Usage
@@ -101,14 +101,14 @@ vim_printer --base-dir ./test/fixtures \
             --theme solarized
 ```
 
-Your output will be saved to the default `output.tar.gz` in the directory where you run this command.
+Your output will be saved to the default `vim_printer_fixtures.tar.gz` in the directory where you run this command.
 To see the output in your browser just type:
 
 ```sh
 mkdir -p ~/Desktop/vim_printer
-mv vim_printer_output.tar.gz ~/Desktop/vim_printer
+mv vim_printer_fixtures.tar.gz ~/Desktop/vim_printer
 cd ~/Desktop/vim_printer
-tar zxvf vim_printer_output.tar.gz
+tar zxvf vim_printer_fixtures.tar.gz
 ```
 
 - Print only files that contain the word `xxx` in the title
@@ -131,24 +131,26 @@ vim_printer -e ruby -f Gemfile Rakefile -r
 
 ```
 Usage:
-  vim_printer
+  vim_printer print
 
 Options:
   -b, [--base-dir=BASE_DIR]                # Base directory
                                            # Default: . (current directory)
   -e, [--exts=one two three]               # List of extensions to search for
-  -f, [--non-exts=one two three]           # List of extensions to search for
-  -n, [--inc-words=one two three]          # List of words to be included in the result
-  -x, [--exc-words=one two three]          # List of words to be excluded from the result
+  -f, [--non-exts=one two three]           # List of files without extension to search for
+  -n, [--inc-words=one two three]          # List of words in the filename to be included in the result if any
+  -x, [--exc-words=one two three]          # List of words in the filename to be excluded from the result if any
   -i, [--ignore-case], [--no-ignore-case]  # Match case insensitively
                                            # Default: true
   -r, [--recursive], [--no-recursive]      # Search for files recursively
                                            # Default: true
-  -t, [--theme=THEME]                      # Vim colorscheme to use
-                                           # Default: default
   -v, [--version], [--no-version]          # Display version information
+  -t, [--theme=THEME]                      # Vim colorscheme to use
+                                           # Default: 'default'
+  -c, [--index], [--no-index]              # Generate the index.html file for the result
+                                           # Default: true
 
-Print the list of files
+Print files to (x)html using Vim
 ```
 
 ### Development/Testing

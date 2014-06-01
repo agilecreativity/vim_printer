@@ -1,5 +1,10 @@
 ### Changelog
 
+#### 0.1.5
+
+- Add option '--index' to make it possible to skip the cration of 'index.html'
+- Make the final output filename 'vim_printer_<base_dir>.tar.gz'
+
 #### 0.1.4
 
 - Skip binary input files when applicable

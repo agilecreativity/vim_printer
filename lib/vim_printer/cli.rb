@@ -6,7 +6,7 @@ require_relative "../vim_printer"
 module VimPrinter
   include AgileUtils
   class CLI < Thor
-    desc "print", "Print the list of files"
+    desc "print", "Print files to (x)html using Vim"
     method_option *AgileUtils::Options::BASE_DIR
     method_option *AgileUtils::Options::EXTS
     method_option *AgileUtils::Options::NON_EXTS
@@ -17,8 +17,13 @@ module VimPrinter
     method_option *AgileUtils::Options::VERSION
     method_option :theme,
                   aliases: "-t",
-                  desc: "Vim colorscheme to use",
+                  desc:    "Vim colorscheme to use",
                   default: "default"
+    method_option :index,
+                  aliases: "-c",
+                  desc:    "Generate the index.html file for the result",
+                  type:    :boolean,
+                  default: true
     def print
       opts = options.symbolize_keys
       if opts[:version]
@@ -32,24 +37,26 @@ module VimPrinter
     def usage
       puts <<-EOS
 Usage:
-  vim_printer
+  vim_printer print
 
 Options:
   -b, [--base-dir=BASE_DIR]                # Base directory
                                            # Default: . (current directory)
   -e, [--exts=one two three]               # List of extensions to search for
-  -f, [--non-exts=one two three]           # List of extensions to search for
-  -n, [--inc-words=one two three]          # List of words to be included in the result
-  -x, [--exc-words=one two three]          # List of words to be excluded from the result
+  -f, [--non-exts=one two three]           # List of files without extension to search for
+  -n, [--inc-words=one two three]          # List of words to be included in the result if any
+  -x, [--exc-words=one two three]          # List of words to be excluded from the result if any
   -i, [--ignore-case], [--no-ignore-case]  # Match case insensitively
                                            # Default: true
   -r, [--recursive], [--no-recursive]      # Search for files recursively
                                            # Default: true
+  -v, [--version], [--no-version]          # Display version information
   -t, [--theme=THEME]                      # Vim colorscheme to use
                                            # Default: default
-  -v, [--version], [--no-version]          # Display version information
+  -c, [--index], [--no-index]              # Generate the index.html file for the result
+                                           # Default: true
 
-Print the list of files
+Print files to (x)html using Vim
       EOS
     end
 
@@ -62,32 +69,27 @@ Print the list of files
     # @param [Hash<Symbol, Object>] options the options argument
     def execute(options = {})
       input_files = CodeLister.files(options)
-      input_files.delete_if { |file| File.binary?(file.gsub(/^\./,options[:base_dir])) }
+      input_files.delete_if { |file| File.binary?(file.gsub(/^\./, options[:base_dir])) }
       if input_files.empty?
         puts "No file found for your option: #{options}"
         return
       end
 
       to_htmls(input_files, options)
-
-      # The generated files is the same as input file but with '.xhtml' appended
-      generated_files = input_files.map do |f|
-        "#{f}.xhtml"
-      end
-
+      generated_files = input_files.map { |f| "#{f}.xhtml" }
       index_file = "./index.html"
       IndexHtml.htmlify generated_files,
                         base_dir: options[:base_dir],
                         output: index_file
-
-      generated_files << index_file
-      AgileUtils::FileUtil.tar_gzip_files(generated_files, "vim_printer_output.tar.gz")
+      generated_files << index_file if options[:index]
+      output_file = "vim_printer_#{File.basename(File.expand_path(options[:base_dir]))}.tar.gz"
+      AgileUtils::FileUtil.tar_gzip_files(generated_files, output_file)
       AgileUtils::FileUtil.delete(generated_files)
-      FileUtils.rm_rf(index_file)
-      puts "Your output file is #{File.absolute_path("vim_printer_output.tar.gz")}"
+      FileUtils.rm_rf(index_file) if options[:index]
+      puts "Your output file is '#{File.absolute_path(output_file)}'"
     end
 
-    # convert multiple files to 'html'
+    # convert multiple files to html
     def to_htmls(files, options = {})
       FileUtils.chdir(File.expand_path(options[:base_dir]))
       files.each_with_index do |file, index|
