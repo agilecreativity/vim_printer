@@ -37,7 +37,7 @@ module VimPrinter
     def usage
       puts <<-EOS
 Usage:
-  vim_printer print
+  vim_printer
 
 Options:
   -b, [--base-dir=BASE_DIR]                # Base directory
