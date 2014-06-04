@@ -49,9 +49,9 @@ Documentation:
 HashSyntax:
   Enabled: true
 
-# No spaces inside hash literals
+# Spaces inside hash literals
 SpaceInsideHashLiteralBraces:
-  EnforcedStyle: no_space
+  EnforcedStyle: space
 
 # Allow dots at the end of lines
 DotPosition:

@@ -1,5 +1,10 @@
 ### Changelog
 
+#### 0.1.6
+
+- Update rubocop to 0.23.x
+- Minor code cleanup
+
 #### 0.1.5
 
 - Add option '--index' to make it possible to skip the cration of 'index.html'
