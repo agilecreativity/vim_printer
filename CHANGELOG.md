@@ -1,5 +1,9 @@
 ### Changelog
 
+#### 0.1.7
+
+- Handle the edge case for File.binary?
+
 #### 0.1.6
 
 - Update rubocop to 0.23.x
