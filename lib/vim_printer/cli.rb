@@ -3,6 +3,7 @@ require "code_lister"
 require "index_html"
 require "fileutils"
 require_relative "../vim_printer"
+require_relative "configuration"
 module VimPrinter
   include AgileUtils
   class CLI < Thor
@@ -41,21 +42,27 @@ Usage:
   vim_printer
 
 Options:
-  -b, [--base-dir=BASE_DIR]                # Base directory
+  -b, [--base-dir=BASE_DIR]                # Base directory (mandatory)
                                            # Default: . (current directory)
-  -e, [--exts=one two three]               # List of extensions to search for
-  -f, [--non-exts=one two three]           # List of files without extension to search for
-  -n, [--inc-words=one two three]          # List of words to be included in the result if any
-  -x, [--exc-words=one two three]          # List of words to be excluded from the result if any
-  -i, [--ignore-case], [--no-ignore-case]  # Match case insensitively
-                                           # Default: true
-  -r, [--recursive], [--no-recursive]      # Search for files recursively
-                                           # Default: true
-  -v, [--version], [--no-version]          # Display version information
-  -t, [--theme=THEME]                      # Vim colorscheme to use
-                                           # Default: default
-  -c, [--index], [--no-index]              # Generate the index.html file for the result
-                                           # Default: true
+  -e, [--exts=one two three]               # List of extension to search for (mandatory)
+                                           # e.g. -e rb md
+  -f, [--non-exts=one two three]           # List of file without extension to be included in the result (optional)
+                                           # e.g. -f Gemfile LICENSE
+  -n, [--inc-words=one two three]          # List of word that must be part of the name to be included in the result (optional)
+                                           # If this option is not specified then
+                                           # all files having the extension specified by -e or all file specified by -f will be included
+  -x, [--exc-words=one two three]          # List of words to be excluded from the result if any (optional)
+                                           # Use this option to filter out files that contain some word in the name
+                                           # e.g. -x '_spec' to exclude files that end with '*_spec.rb' in the name
+  -i, [--ignore-case], [--no-ignore-case]  # Match case insensitively apply to both -f, n, and -x options (optional)
+                                           # Default: --ignore-case
+  -r, [--recursive], [--no-recursive]      # Search for files recursively (optional)
+                                           # Default: --recursive
+  -v, [--version]                          # Display version information
+  -t, [--theme=THEME]                      # Vim colorscheme to use (optional)
+                                           # Default: 'default'
+  -c, [--index], [--no-index]              # Generate the index.html file for the result (optional)
+                                           # Default: --index
 
 Print files to (x)html using Vim
       EOS
@@ -106,14 +113,13 @@ Print files to (x)html using Vim
       }.merge(options)
 
       fail "Invalid input file #{filename}" unless File.exist?(filename)
+      html_options = VimPrinter.configuration.options[:html]
 
       # sensible argument, see :help :TOhtml (from Vim)
       command = [
         "vim",
         "-E",
-        "-c 'let g:html_expand_tabs = 1'",
-        "-c 'let g:html_use_css = 1'",
-        "-c 'let g:html_no_progress = 1'"
+        *VimPrinter.configuration.options[:html]
       ]
 
       # set the colorscheme for the output

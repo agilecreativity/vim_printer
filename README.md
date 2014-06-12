@@ -134,24 +134,52 @@ Usage:
   vim_printer
 
 Options:
-  -b, [--base-dir=BASE_DIR]                # Base directory
+  -b, [--base-dir=BASE_DIR]                # Base directory (mandatory)
                                            # Default: . (current directory)
-  -e, [--exts=one two three]               # List of extensions to search for
-  -f, [--non-exts=one two three]           # List of files without extension to search for
-  -n, [--inc-words=one two three]          # List of words in the filename to be included in the result if any
-  -x, [--exc-words=one two three]          # List of words in the filename to be excluded from the result if any
-  -i, [--ignore-case], [--no-ignore-case]  # Match case insensitively
-                                           # Default: true
-  -r, [--recursive], [--no-recursive]      # Search for files recursively
-                                           # Default: true
-  -v, [--version], [--no-version]          # Display version information
-  -t, [--theme=THEME]                      # Vim colorscheme to use
+  -e, [--exts=one two three]               # List of extension to search for (mandatory)
+                                           # e.g. -e rb md
+  -f, [--non-exts=one two three]           # List of file without extension to be included in the result (optional)
+                                           # e.g. -f Gemfile LICENSE
+  -n, [--inc-words=one two three]          # List of word that must be part of the name to be included in the result (optional)
+                                           # If this option is not specified then
+                                           # all files having the extension specified by -e or all file specified by -f will be included
+  -x, [--exc-words=one two three]          # List of words to be excluded from the result if any (optional)
+                                           # Use this option to filter out files that contain some word in the name
+                                           # e.g. -x '_spec' to exclude files that end with '*_spec.rb' in the name
+  -i, [--ignore-case], [--no-ignore-case]  # Match case insensitively apply to both -f, n, and -x options (optional)
+                                           # Default: --ignore-case
+  -r, [--recursive], [--no-recursive]      # Search for files recursively (optional)
+                                           # Default: --recursive
+  -v, [--version]                          # Display version information
+  -t, [--theme=THEME]                      # Vim colorscheme to use (optional)
                                            # Default: 'default'
-  -c, [--index], [--no-index]              # Generate the index.html file for the result
-                                           # Default: true
+  -c, [--index], [--no-index]              # Generate the index.html file for the result (optional)
+                                           # Default: --index
 
 Print files to (x)html using Vim
 ```
+
+### Customization for output options
+
+You can customize how the output is produced by using the following configuration.
+
+Edit the file `config/initializers/vim_printer.rb` to adjust the options used by
+`:TOhtml` in Vim. (see `:help :TOhtml` from inside Vim for more detail)
+
+The default settings for the `:TOhtml` are as follow
+
+```ruby
+[
+  "-c 'let g:html_expand_tabs = 1'",
+  "-c 'let g:html_use_css = 1'",
+  "-c 'let g:html_no_progress = 1'",
+  "-c 'let g:html_number_lines = 1'"
+]
+```
+
+For example, if you like to suppress the line number in the output you will
+need to use `"-c 'let g:html_number_lines = 0'"` which will suppress the
+setting of `:set number` in Vim.
 
 ### Development/Testing
 

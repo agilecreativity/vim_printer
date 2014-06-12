@@ -1,5 +1,11 @@
 ### Changelog
 
+#### 0.1.8
+
+- Add `configuration.rb` for easy customization of options to `:TOhtml` [New]
+- Update default usage in `cli.rb` and `README.md` [Improvement]
+- Suppress line number in the result by default [Improvement]
+
 #### 0.1.7
 
 - Handle the edge case for File.binary?
