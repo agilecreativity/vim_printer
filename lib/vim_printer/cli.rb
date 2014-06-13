@@ -26,6 +26,10 @@ module VimPrinter
                   desc:    "Generate the index.html file for the result",
                   type:    :boolean,
                   default: true
+    method_option :shell_command,
+                  aliases: "-s",
+                  desc: "Use input file list from the result of the given shell command",
+                  type: :string
     def print
       opts = options.symbolize_keys
       if opts[:version]
@@ -63,7 +67,11 @@ Options:
                                            # Default: 'default'
   -c, [--index], [--no-index]              # Generate the index.html file for the result (optional)
                                            # Default: --index
-
+  -s, [--shell-command]                    # Use the input file list from the result of the given shell command (optional)
+                                           # Note: the command must be result in the list of files
+                                           # This option ignore any of the following options -e, -f, -n, -x, -i if specified
+                                           # e.g. --shell-command 'git diff --name-only HEAD~2 | grep -v test'
+                                           # e.g. --shell-command 'find . -type f -iname "*.rb" | grep -v test | grep -v _spec'
 Print files to (x)html using Vim
       EOS
     end
@@ -73,12 +81,61 @@ Print files to (x)html using Vim
 
   private
 
+    # Get the appropriate input from the options
+    #
+    # @param [Hash<Symbol, Object>] args the input options
+    # @option args [String] :shell_input the shell input string if any
+    # @return [Array<String>] list of files in the format
+    #
+    #   ["./Gemfile", "./lib/vim_printer/cli.rb", ..]
+    def get_input_files(args = {})
+      shell_command = args.fetch(:shell_command, nil)
+      if shell_command.nil?
+        # use other options if we don't use the '--shell-input' option
+        CodeLister.files(args)
+      else
+        files_from_shell_command(shell_command, args[:base_dir])
+      end
+    end
+
+    # Execute the command in the shell and return the output list for use
+    # e.g. `git diff --name-only HEAD~1` is getting the list of files that have been
+    # updated in the last commit
+    #
+    # @param [String] shell_input the input command to be executed in the shell
+    # @param [String] base_dir the starting directory
+    # @return [Array<String>] file list or empty list if the shell command is not valid
+    def files_from_shell_command(command, base_dir)
+      files = AgileUtils::Helper.shell(command.split(" ")).split(/\n/)
+      # Adapt the result and make sure that it start with "./"
+      # like the result from 'CodeLister.files()' method
+      files.map! do |file|
+        if file =~ /^\.\//
+          # skip if the file start with './' string
+          file
+        else
+          # add './' to the one that does not already have one
+          "./#{file}"
+        end
+      end
+      # Note: this make sure that it work with deleted file when use
+      # this with 'git diff --name-only HEAD~2'
+      files.delete_if { |file| !File.exist?(file.gsub(/^\./, base_dir)) }
+    rescue RuntimeError => e
+      # just return the empty list, if the user specified invalid command for 'shell_input' option
+      return []
+    end
+
     # Main entry point to export the code
     #
     # @param [Hash<Symbol, Object>] options the options argument
     def execute(options = {})
-      input_files = CodeLister.files(options)
-      input_files.delete_if { |file| File.binary?(file.gsub(/^\./, options[:base_dir])) }
+      input_files = get_input_files(options)
+      # we want to avoid printing the binary file
+      input_files.delete_if do |file|
+        File.binary?(file.gsub(/^\./, options[:base_dir]))
+      end
+
       if input_files.empty?
         puts "No file found for your option: #{options}"
         return

@@ -155,7 +155,11 @@ Options:
                                            # Default: 'default'
   -c, [--index], [--no-index]              # Generate the index.html file for the result (optional)
                                            # Default: --index
-
+  -s, [--shell-command]                    # Use the input file list from the result of the given shell command (optional)
+                                           # Note: the command must be result in the list of files
+                                           # This option ignore any of the following options -e, -f, -n, -x, -i if specified
+                                           # e.g. --shell-command 'git diff --name-only HEAD~2 | grep -v test'
+                                           # e.g. --shell-command 'find . -type f -iname "*.rb" | grep -v test'
 Print files to (x)html using Vim
 ```
 

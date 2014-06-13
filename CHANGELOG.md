@@ -1,5 +1,9 @@
 ### Changelog
 
+#### 0.1.9
+
+- Add advance `--shell_command` option to get the input file list from the the shell command [New]
+
 #### 0.1.8
 
 - Add `configuration.rb` for easy customization of options to `:TOhtml` [New]
