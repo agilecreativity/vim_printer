@@ -1,5 +1,10 @@
 ### Changelog
 
+#### 0.1.10
+
+- Rename `--shell-command` to `--command` [Improvement]
+- Move the logic to `code_lister` gem
+
 #### 0.1.9
 
 - Add advance `--shell_command` option to get the input file list from the the shell command [New]

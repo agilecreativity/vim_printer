@@ -26,10 +26,9 @@ module VimPrinter
                   desc:    "Generate the index.html file for the result",
                   type:    :boolean,
                   default: true
-    method_option :shell_command,
+    method_option :command,
                   aliases: "-s",
-                  desc: "Use input file list from the result of the given shell command",
-                  type: :string
+                  desc: "Use input file list from the result of the given shell command"
     def print
       opts = options.symbolize_keys
       if opts[:version]
@@ -46,9 +45,9 @@ Usage:
   vim_printer
 
 Options:
-  -b, [--base-dir=BASE_DIR]                # Base directory (mandatory)
+  -b, [--base-dir=BASE_DIR]                # Base directory
                                            # Default: . (current directory)
-  -e, [--exts=one two three]               # List of extension to search for (mandatory)
+  -e, [--exts=one two three]               # List of extension to search for
                                            # e.g. -e rb md
   -f, [--non-exts=one two three]           # List of file without extension to be included in the result (optional)
                                            # e.g. -f Gemfile LICENSE
@@ -63,15 +62,16 @@ Options:
   -r, [--recursive], [--no-recursive]      # Search for files recursively (optional)
                                            # Default: --recursive
   -v, [--version]                          # Display version information
+                                           #
   -t, [--theme=THEME]                      # Vim colorscheme to use (optional)
                                            # Default: 'default'
   -c, [--index], [--no-index]              # Generate the index.html file for the result (optional)
                                            # Default: --index
-  -s, [--shell-command]                    # Use the input file list from the result of the given shell command (optional)
-                                           # Note: the command must be result in the list of files
+  -s, [--command]                          # Use the input file list from the result of the given shell command
+                                           # Note: the command must return the list of file to be valid
                                            # This option ignore any of the following options -e, -f, -n, -x, -i if specified
-                                           # e.g. --shell-command 'git diff --name-only HEAD~2 | grep -v test'
-                                           # e.g. --shell-command 'find . -type f -iname "*.rb" | grep -v test | grep -v _spec'
+                                           # e.g. --command 'git diff --name-only HEAD~2 | grep -v test'
+                                           # e.g. --command 'find . -type f -iname "*.rb" | grep -v test | grep -v _spec'
 Print files to (x)html using Vim
       EOS
     end
@@ -81,49 +81,20 @@ Print files to (x)html using Vim
 
   private
 
-    # Get the appropriate input from the options
+    # Get the list of input file
     #
     # @param [Hash<Symbol, Object>] args the input options
-    # @option args [String] :shell_input the shell input string if any
+    # @option args [String] :command the shell command to be used to get list of files
     # @return [Array<String>] list of files in the format
-    #
-    #   ["./Gemfile", "./lib/vim_printer/cli.rb", ..]
+    #         ["./Gemfile", "./lib/vim_printer/cli.rb", ..]
     def get_input_files(args = {})
-      shell_command = args.fetch(:shell_command, nil)
-      if shell_command.nil?
-        # use other options if we don't use the '--shell-input' option
+      command  = args.fetch(:command, nil)
+      base_dir = args[:base_dir]
+      if command.nil?
         CodeLister.files(args)
       else
-        files_from_shell_command(shell_command, args[:base_dir])
+        CodeLister.files_from_command(command, base_dir)
       end
-    end
-
-    # Execute the command in the shell and return the output list for use
-    # e.g. `git diff --name-only HEAD~1` is getting the list of files that have been
-    # updated in the last commit
-    #
-    # @param [String] shell_input the input command to be executed in the shell
-    # @param [String] base_dir the starting directory
-    # @return [Array<String>] file list or empty list if the shell command is not valid
-    def files_from_shell_command(command, base_dir)
-      files = AgileUtils::Helper.shell(command.split(" ")).split(/\n/)
-      # Adapt the result and make sure that it start with "./"
-      # like the result from 'CodeLister.files()' method
-      files.map! do |file|
-        if file =~ /^\.\//
-          # skip if the file start with './' string
-          file
-        else
-          # add './' to the one that does not already have one
-          "./#{file}"
-        end
-      end
-      # Note: this make sure that it work with deleted file when use
-      # this with 'git diff --name-only HEAD~2'
-      files.delete_if { |file| !File.exist?(file.gsub(/^\./, base_dir)) }
-    rescue RuntimeError => e
-      # just return the empty list, if the user specified invalid command for 'shell_input' option
-      return []
     end
 
     # Main entry point to export the code

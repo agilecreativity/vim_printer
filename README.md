@@ -134,9 +134,9 @@ Usage:
   vim_printer
 
 Options:
-  -b, [--base-dir=BASE_DIR]                # Base directory (mandatory)
+  -b, [--base-dir=BASE_DIR]                # Base directory
                                            # Default: . (current directory)
-  -e, [--exts=one two three]               # List of extension to search for (mandatory)
+  -e, [--exts=one two three]               # List of extension to search for
                                            # e.g. -e rb md
   -f, [--non-exts=one two three]           # List of file without extension to be included in the result (optional)
                                            # e.g. -f Gemfile LICENSE
@@ -151,16 +151,18 @@ Options:
   -r, [--recursive], [--no-recursive]      # Search for files recursively (optional)
                                            # Default: --recursive
   -v, [--version]                          # Display version information
+                                           #
   -t, [--theme=THEME]                      # Vim colorscheme to use (optional)
                                            # Default: 'default'
   -c, [--index], [--no-index]              # Generate the index.html file for the result (optional)
                                            # Default: --index
-  -s, [--shell-command]                    # Use the input file list from the result of the given shell command (optional)
-                                           # Note: the command must be result in the list of files
+  -s, [--command]                          # Use the input file list from the result of the given shell command
+                                           # Note: the command must return the list of file to be valid
                                            # This option ignore any of the following options -e, -f, -n, -x, -i if specified
-                                           # e.g. --shell-command 'git diff --name-only HEAD~2 | grep -v test'
-                                           # e.g. --shell-command 'find . -type f -iname "*.rb" | grep -v test'
+                                           # e.g. --command 'git diff --name-only HEAD~2 | grep -v test'
+                                           # e.g. --command 'find . -type f -iname "*.rb" | grep -v test | grep -v _spec'
 Print files to (x)html using Vim
+
 ```
 
 ### Customization for output options
