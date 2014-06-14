@@ -8,12 +8,13 @@
 [gemnasium]: https://gemnasium.com/agilecreativity/vim_printer
 [codeclimate]: https://codeclimate.com/github/agilecreativity/vim_printer
 
-Batch print/export files to htmls using the power of Vim. Output will be saved to `vim_printer_output.tar.gz` and ready for
-extract and viewing in your favourite browser.
+Batch print/export files to htmls using the power of Vim. Output will be saved to `vim_printer_#{project_name}.tar.gz` and ready for
+extract and view in your favourite browser.
 
 - Unlimited support for [vim colorschemes][] if enabled, or `default` colorscheme that comes with Vim.
 - Can print any files in any languages that you can open with Vim.
 - Use the power of [Vim][] to print the code without any other tools.
+- Skip any binary files automatically
 
 ### Example Outputs:
 
@@ -126,8 +127,38 @@ vim_printer --base-dir ./test/fixtures \
 # To print all ruby files as well as 'Gemfile' or 'Rakefile'
 vim_printer -e ruby -f Gemfile Rakefile -r
 ```
+### Advanced Usage
 
-- For help in using the gem just type `vim_printer` without any parameter
+The new `--command` or `-s` flag can be used to get the input from the list of file.
+Any unix command that can produce the result in the list of file can be used to
+generate the input for printing.
+
+My personal use-cases:
+
+- Print out any files that we changed in the last N git commit
+(Note any binary files or deleted files will skipped automatically)
+
+e.g. Print out any files that were changed in the last 2 commit
+
+```shell
+vim_printer --command 'git diff --name-only'
+```
+
+- Use list of file from the result of `find` with `grep` command
+
+```shell
+vim_printer --command 'find . -type f -iname "*.rb" | grep -v _spec'
+```
+
+- Use the list of file from a pre-defined list in a text file
+
+```
+vim_printer --command 'cat my-input-file-list.txt'
+```
+
+### Usage/Synopsys
+
+For help in using the gem just type `vim_printer` without any parameter
 
 ```
 Usage:
