@@ -1,5 +1,9 @@
 ### Changelog
 
+#### 0.1.11
+
+- Use lastest version of `code_lister` (0.1.4)
+
 #### 0.1.10
 
 - Rename `--shell-command` to `--command` [Improvement]
