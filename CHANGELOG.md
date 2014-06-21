@@ -1,5 +1,13 @@
 ### Changelog
 
+#### 0.1.12
+
+- Update gemspec to be more precise about gem versions used
+- Use the latest version of `code_lister` (0.1.17)
+- Use the latest version of `agile_utils` (0.1.4)
+- Use the latest version of `index_html` (0.1.4)
+- Add example detail on how to run with `--command` option
+
 #### 0.1.11
 
 - Use lastest version of `code_lister` (0.1.4)

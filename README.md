@@ -141,20 +141,43 @@ My personal use-cases:
 e.g. Print out any files that were changed in the last 2 commit
 
 ```shell
-vim_printer --command 'git diff --name-only'
+# Must be run from inside the project directory containging the git project
+vim_printer --command 'git diff --name-only HEAD~2'
 ```
 
-- Use list of file from the result of `find` with `grep` command
+- Use list of file from the result of `find` with `grep` command (from inside the project directory)
 
 ```shell
 vim_printer --command 'find . -type f -iname "*.rb" | grep -v _spec'
 ```
 
-- Use the list of file from a pre-defined list in a text file
+### Limitation/Workaround
+
+- The `--base-dir` must be used with the `--command` if the command is not run in the context of current directory.
+
+e.g. Assume that you want to print all of the ruby `*.rb` files from `~/Desktop/project` and you are not currently
+inside the `~/Desktop/project` directory
 
 ```
-vim_printer --command 'cat my-input-file-list.txt'
+# Go to home directory
+cd ~
+
+# Note we are not inside the `~/Desktop/project` directory
+vim_printer --command "find ~/Desktop/project -type f -iname '*.rb'" --base-dir ~/Desktop/project
 ```
+
+Will give the proper links in the generated `index.html` file
+
+But
+
+```
+# Go to home directory
+cd ~
+
+# Run the command from the home directory
+vim_printer --command "find ~/Desktop/project -type f -iname '*.rb'" --base-dir .
+```
+will produces the invalid links in the generated `index.html` file
 
 ### Usage/Synopsys
 

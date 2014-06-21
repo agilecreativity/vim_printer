@@ -24,9 +24,9 @@ Gem::Specification.new do |spec|
   spec.test_files    = Dir.glob("{test}/**/*")
   spec.require_paths = ["lib"]
   spec.add_runtime_dependency "thor", "~> 0.19"
-  spec.add_runtime_dependency "code_lister", "~> 0.1.4"
-  spec.add_runtime_dependency "index_html", "~> 0.1"
-  spec.add_runtime_dependency "agile_utils", "~> 0.1"
+  spec.add_runtime_dependency "code_lister", "~> 0.1.7"
+  spec.add_runtime_dependency "index_html", "~> 0.1.4"
+  spec.add_runtime_dependency "agile_utils", "~> 0.1.4"
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"
   spec.add_development_dependency "awesome_print", "~> 1.2"

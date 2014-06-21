@@ -89,11 +89,11 @@ Print files to (x)html using Vim
     #         ["./Gemfile", "./lib/vim_printer/cli.rb", ..]
     def get_input_files(args = {})
       command  = args.fetch(:command, nil)
-      base_dir = args[:base_dir]
       if command.nil?
         CodeLister.files(args)
       else
-        CodeLister.files_from_command(command, base_dir)
+        # Note: base_dir must be the the same the directory where the command is executed from
+        CodeLister.files_from_shell(command, args.fetch(:base_dir, "."))
       end
     end
 
