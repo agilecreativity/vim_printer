@@ -18,6 +18,7 @@ module VimPrinter
     def configuration
       @configuration ||= Configuration.new
     end
+
     def configure
       yield configuration
     end
