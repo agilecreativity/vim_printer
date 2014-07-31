@@ -1,5 +1,9 @@
 ### Changelog
 
+#### 0.2.1
+
+- Only support ruby version 2.1.0+ due to the use of refinement
+
 #### 0.2.0
 
 - Update gems to use refinement instead of monkeypatching
