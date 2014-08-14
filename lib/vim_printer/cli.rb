@@ -7,8 +7,6 @@ require_relative "configuration"
 module VimPrinter
   include AgileUtils
   class CLI < Thor
-    using AgileUtils::HashExt
-
     # rubocop:disable AmbiguousOperator, MethodLength
     desc "print", "Print files to (x)html using Vim"
     method_option *AgileUtils::Options::BASE_DIR

@@ -1,5 +1,11 @@
 ### Changelog
 
+#### 0.2.2
+
+- Support ruby version 1.9.3+
+- Update gem dependencies
+- Misc cleanup
+
 #### 0.2.1
 
 - Only support ruby version 2.1.0+ due to the use of refinement
