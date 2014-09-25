@@ -115,9 +115,9 @@ Print files to (x)html using Vim
       to_htmls(input_files, options)
       generated_files = input_files.map { |f| "#{f}.xhtml" }
       index_file = "./index.html"
-      IndexHtml.htmlify generated_files,
-                        base_dir: options[:base_dir],
-                        output: index_file
+      IndexHtml.htmlify generated_files, base_dir: options[:base_dir],
+                                         output:   index_file,
+                                         drop_ext: true
       generated_files << index_file if options[:index]
       output_file = "vim_printer_#{File.basename(File.expand_path(options[:base_dir]))}.tar.gz"
       AgileUtils::FileUtil.tar_gzip_files(generated_files, output_file)

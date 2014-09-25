@@ -1,5 +1,10 @@
 ### Changelog
 
+#### 0.2.3
+
+- Show the proper link name in the `index.html`
+- Update the :TOhtml option to always ignore folding if set by user
+
 #### 0.2.2
 
 - Support ruby version 1.9.3+
