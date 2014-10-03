@@ -1,5 +1,9 @@
 ### Changelog
 
+#### 0.2.5
+
+- Update gem dependencies
+
 #### 0.2.4
 
 - Use `require` instead of `require_relative` when possible
