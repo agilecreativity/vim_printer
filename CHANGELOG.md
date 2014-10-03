@@ -1,5 +1,9 @@
 ### Changelog
 
+#### 0.2.4
+
+- Use `require` instead of `require_relative` when possible
+
 #### 0.2.3
 
 - Show the proper link name in the `index.html`

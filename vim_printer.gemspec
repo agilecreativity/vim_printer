@@ -13,14 +13,14 @@ Gem::Specification.new do |spec|
   spec.homepage      = "https://github.com/agilecreativity/vim_printer"
   spec.required_ruby_version = ">= 1.9.3"
   spec.license       = "MIT"
-  spec.files         = Dir.glob("{bin,lib,config}/**/*") + %w[Gemfile
-                                                              Rakefile
-                                                              vim_printer.gemspec
-                                                              README.md
-                                                              CHANGELOG.md
-                                                              LICENSE
-                                                              .rubocop.yml
-                                                              .gitignore]
+  spec.files         = Dir.glob("{bin,lib}/**/*") + %w[Gemfile
+                                                       Rakefile
+                                                       vim_printer.gemspec
+                                                       README.md
+                                                       CHANGELOG.md
+                                                       LICENSE
+                                                       .rubocop.yml
+                                                       .gitignore]
   spec.executables   = spec.files.grep(%r{^bin/}) { |f| File.basename(f) }
   spec.test_files    = Dir.glob("{test}/**/*")
   spec.require_paths = ["lib"]

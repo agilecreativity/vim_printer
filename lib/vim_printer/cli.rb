@@ -1,9 +1,3 @@
-require "agile_utils"
-require "code_lister"
-require "index_html"
-require "fileutils"
-require_relative "../vim_printer"
-require_relative "configuration"
 module VimPrinter
   include AgileUtils
   class CLI < Thor

@@ -1,4 +1,3 @@
-require_relative "../../lib/vim_printer/configuration"
 module VimPrinter
   class << self
     def update_config

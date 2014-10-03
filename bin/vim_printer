@@ -1,6 +1,5 @@
 #!/usr/bin/env ruby
 require_relative "../lib/vim_printer"
-require_relative "../config/initializers/vim_printer"
 VimPrinter.update_config
 if ARGV.empty?
   VimPrinter::CLI.start(%w[usage])

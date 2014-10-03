@@ -223,17 +223,19 @@ Print files to (x)html using Vim
 
 You can customize how the output is produced by using the following configuration.
 
-Edit the file `config/initializers/vim_printer.rb` to adjust the options used by
+Edit the file `lib/vim_printer/config/vim_printer.rb` to adjust the options used by
 `:TOhtml` in Vim. (see `:help :TOhtml` from inside Vim for more detail)
 
 The default settings for the `:TOhtml` are as follow
 
 ```ruby
 [
-  "-c 'let g:html_expand_tabs = 1'",
-  "-c 'let g:html_use_css = 1'",
-  "-c 'let g:html_no_progress = 1'",
-  "-c 'let g:html_number_lines = 1'"
+    "-c 'let g:html_expand_tabs = 1'",
+    "-c 'let g:html_use_css = 1'",
+    "-c 'let g:html_no_progress = 1'",
+    "-c 'let g:html_number_lines = 0'",
+    "-c 'let g:html_use_xhtml = 1'",
+    "-c 'let g:html_ignore_folding = 1'"
 ]
 ```
 
