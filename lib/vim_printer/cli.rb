@@ -24,7 +24,7 @@ module VimPrinter
                   aliases: "-s",
                   desc: "Use input file list from the result of the given shell command"
     def print
-      opts = options.symbolize_keys
+      opts = options.deep_symbolize_keys
       if opts[:version]
         puts "You are using VimPrinter version #{VimPrinter::VERSION}"
         exit
