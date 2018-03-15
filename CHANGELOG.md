@@ -1,5 +1,9 @@
 ### Changelog
 
+#### 0.2.7
+
+- Fix potential security vulnerabilities
+
 #### 0.2.6
 
 - Update gem's dependencies
